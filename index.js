@@ -5,9 +5,12 @@ const { React } = require("powercord/webpack");
 const JokeModal = require("./jokeModal")
 
 module.exports = class ChuckNorrisFacts extends Plugin {
+  run = () => get("https://api.chucknorris.io/jokes/random").execute().then((result) => this.showJoke(result.body)).catch((err) => this.warn(err));
+
   startPlugin () {
-    this.loadStylesheet("styles.css")
-    get("https://api.chucknorris.io/jokes/random").execute().then((result) => this.showJoke(result.body)).catch((err) => this.warn(err))
+    this.loadStylesheet("styles.css");
+    this.setupCommand();
+    this.run()
   }
 
   showJoke (joke) {
@@ -18,5 +21,18 @@ module.exports = class ChuckNorrisFacts extends Plugin {
         text: "Show"
       }
     });
+  }
+
+  setupCommand () {
+    powercord.api.commands.registerCommand({
+      command: "chuckfact",
+      description: "Displays a Chuck Norris fact",
+      usage: "{c}",
+      executor: () => this.run()
+    });
+  }
+
+  pluginWillUnload () {
+    powercord.api.commands.unregisterCommand("chuckfact");
   }
 };
