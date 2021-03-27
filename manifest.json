@@ -1,0 +1,7 @@
+{
+  "name": "Chuck Norris Facts",
+  "version": "1.0.0",
+  "description": "Get a Chuck Norris fact from https://api.chucknorris.io/ on startup",
+  "author": "RazerMoon",
+  "license": "MIT"
+}
