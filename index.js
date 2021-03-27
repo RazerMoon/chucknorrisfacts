@@ -11,7 +11,7 @@ module.exports = class ChuckNorrisFacts extends Plugin {
   }
 
   showJoke (joke) {
-    powercord.api.notices.sendAnnouncement('rz-chucknorrisfacts', {
+    powercord.api.notices.sendAnnouncement('chucknorrisfacts', {
       message: "Found a Chuck Norris fact!",
       button: {
         onClick: () => {open(() => React.createElement(JokeModal, {joke}))},
